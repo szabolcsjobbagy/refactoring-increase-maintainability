@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>47/47</span>
+                <span class='fraction'>58/58</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.23% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>20/21</span>
+                <span class='fraction'>23/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>47/47</span>
+                <span class='fraction'>58/58</span>
             </div>
         
             
@@ -110,7 +110,18 @@
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">22x</span>
@@ -122,25 +133,32 @@
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">78x</span>
+<span class="cline-any cline-yes">78x</span>
+<span class="cline-any cline-yes">78x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">20x</span>
@@ -157,52 +175,67 @@
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { GRADE_NAMES, MESSAGES, SCORE_LIMITS } from "./constants"
-import { isNumberBetween, isNumberLessThan, throwError } from "./utilities"
+import { isMissing, isNumeric, isNumberBetween, isNumberLessThan, throwError } from "./utilities"
 &nbsp;
 export function calculateGrade(score: number): string {
-	validateScore(score)
-	return assignGradeToScore(score)
+	validateInput(score)
+	return assignGrade(score)
 }
 &nbsp;
-function validateScore(score: number): void {
-	if (isScoreMissing(score)) handleInvalidScore("MISSING_SCORE")
-	if (!isScoreNumeric(score)) <span class="branch-0 cbranch-no" title="branch not covered" >handleInvalidScore("INVALID_TEXT_SCORE")</span>
-	if (!isScoreNumericValid(score)) handleInvalidScore("INVALID_NUMBER_SCORE")
+function validateInput(score: number): void {
+	validateMissing(score)
+	validateExisting(score)
 }
 &nbsp;
-function assignGradeToScore(score: number) {
-	if (isScoreFailed(score)) return GRADE_NAMES.FAILED
-	if (isScorePassed(score)) return GRADE_NAMES.PASSED
-	return isScoreVeryGood(score) ? GRADE_NAMES.VERY_GOOD : GRADE_NAMES.EXCELLENT
+function validateMissing(score: number): void {
+	if (isMissing(score)) handleInvalid("MISSING_INPUT")
 }
 &nbsp;
-function handleInvalidScore(messageType: keyof typeof MESSAGES) {
+function validateExisting(score: number): void {
+	if (!isNumeric(score)) handleInvalid("NOT_A_NUMBER")
+	if (!isNumericValid(score)) handleInvalid("INVALID_NUMBER")
+}
+&nbsp;
+function assignGrade(score: number): string {
+	return isFailed(score) ? getGrade("FAILED") : assignNotFailedGrade(score)
+}
+&nbsp;
+function assignNotFailedGrade(score: number) {
+	if (isPassed(score)) return getGrade("PASSED")
+	return isVeryGood(score) ? getGrade("VERY_GOOD") : getGrade("EXCELLENT")
+}
+&nbsp;
+function getGrade(gradeType: keyof typeof GRADE_NAMES) {
+	return GRADE_NAMES[gradeType]
+}
+&nbsp;
+function getScoreLimit(limitType: keyof typeof SCORE_LIMITS) {
+	return SCORE_LIMITS[limitType]
+}
+&nbsp;
+function isNumericValid(score: number): boolean {
+	return isNumberBetween(score, getScoreLimit("MIN"), getScoreLimit("MAX"))
+}
+&nbsp;
+function isFailed(score: number): boolean {
+	return isNumberLessThan(score, getScoreLimit("PASSED_MIN"))
+}
+&nbsp;
+function isPassed(score: number): boolean {
+	return isNumberLessThan(score, getScoreLimit("VERY_GOOD_MIN"))
+}
+&nbsp;
+function isVeryGood(score: number): boolean {
+	return isNumberLessThan(score, getScoreLimit("EXCELLENT_MIN"))
+}
+&nbsp;
+function handleInvalid(messageType: keyof typeof MESSAGES) {
 	throwError(MESSAGES[messageType])
-}
-&nbsp;
-function isScoreMissing(score: any): boolean {
-	return score == null || score == undefined || Number.isNaN(score)
-}
-&nbsp;
-function isScoreNumeric(score: any): boolean {
-	return typeof score == "number"
-}
-&nbsp;
-function isScoreNumericValid(score: number): boolean {
-	return isNumberBetween(score, SCORE_LIMITS.MIN, SCORE_LIMITS.MAX)
-}
-&nbsp;
-function isScoreFailed(score: number): boolean {
-	return isNumberLessThan(score, SCORE_LIMITS.PASSED_MIN)
-}
-&nbsp;
-function isScorePassed(score: number): boolean {
-	return isNumberLessThan(score, SCORE_LIMITS.VERY_GOOD_MIN)
-}
-&nbsp;
-function isScoreVeryGood(score: number): boolean {
-	return isNumberLessThan(score, SCORE_LIMITS.EXCELLENT_MIN)
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -211,7 +244,7 @@ function isScoreVeryGood(score: number): boolean {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-06T11:19:17.648Z
+                at 2024-01-06T15:35:37.248Z
             </div>
         <script src="prettify.js"></script>
         <script>

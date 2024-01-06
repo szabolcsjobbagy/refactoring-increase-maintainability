@@ -39,11 +39,11 @@ describe("calculateGrade", () => {
 
 	describe("Error paths", () => {
 		it.each`
-			inputValue        | expectedErrorMessage
-			${NaN}            | ${"Missing score"}
-			${-1}             | ${"Invalid score: Score must be between 0 and 100"}
-			${101}            | ${"Invalid score: Score must be between 0 and 100"}
-			${Number("text")} | ${"Invalid score: Score must be a NUMBER between 0 and 100, not a text"}
+			inputValue | expectedErrorMessage
+			${NaN}     | ${"Missing input"}
+			${-1}      | ${"Invalid number input"}
+			${101}     | ${"Invalid number input"}
+			${"text"}  | ${"Input is not a number"}
 		`("should throw an ERROR in case of invalid score: $inputValue", (testCases) => {
 			const { inputValue, expectedErrorMessage } = testCases
 			// Arrange

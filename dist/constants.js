@@ -5,9 +5,12 @@ export const GRADE_NAMES = {
     EXCELLENT: "A",
 };
 export const MESSAGES = {
-    MISSING_SCORE: "Missing score",
-    INVALID_NUMBER_SCORE: "Invalid score: Score must be between 0 and 100",
-    INVALID_TEXT_SCORE: "Invalid score: Score must be a NUMBER between 0 and 100, not a text",
+    EMPTY_TEXT: "Empty text",
+    INVALID_NUMBER: "Invalid number input",
+    INVALID_TEXT_LENGTH: "Invalid text length",
+    INVALID_TEXT_PATTERN: "Invalid text pattern",
+    MISSING_INPUT: "Missing input",
+    NOT_A_NUMBER: "Input is not a number",
 };
 export const SCORE_LIMITS = {
     MIN: 0,
@@ -15,4 +18,8 @@ export const SCORE_LIMITS = {
     VERY_GOOD_MIN: 80,
     EXCELLENT_MIN: 90,
     MAX: 100,
+};
+export const INPUT_LENGTH_LIMITS = {
+    MIN: 5,
+    MAX: 20,
 };

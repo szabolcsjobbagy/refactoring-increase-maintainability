@@ -1,42 +1,49 @@
 import { GRADE_NAMES, MESSAGES, SCORE_LIMITS } from "./constants";
-import { isNumberBetween, isNumberLessThan, throwError } from "./utilities";
+import { isMissing, isNumeric, isNumberBetween, isNumberLessThan, throwError } from "./utilities";
 export function calculateGrade(score) {
-    validateScore(score);
-    return assignGradeToScore(score);
+    validateInput(score);
+    return assignGrade(score);
 }
-function validateScore(score) {
-    if (isScoreMissing(score))
-        handleInvalidScore("MISSING_SCORE");
-    if (!isScoreNumeric(score))
-        handleInvalidScore("INVALID_TEXT_SCORE");
-    if (!isScoreNumericValid(score))
-        handleInvalidScore("INVALID_NUMBER_SCORE");
+function validateInput(score) {
+    validateMissing(score);
+    validateExisting(score);
 }
-function assignGradeToScore(score) {
-    if (isScoreFailed(score))
-        return GRADE_NAMES.FAILED;
-    if (isScorePassed(score))
-        return GRADE_NAMES.PASSED;
-    return isScoreVeryGood(score) ? GRADE_NAMES.VERY_GOOD : GRADE_NAMES.EXCELLENT;
+function validateMissing(score) {
+    if (isMissing(score))
+        handleInvalid("MISSING_INPUT");
 }
-function handleInvalidScore(messageType) {
+function validateExisting(score) {
+    if (!isNumeric(score))
+        handleInvalid("NOT_A_NUMBER");
+    if (!isNumericValid(score))
+        handleInvalid("INVALID_NUMBER");
+}
+function assignGrade(score) {
+    return isFailed(score) ? getGrade("FAILED") : assignNotFailedGrade(score);
+}
+function assignNotFailedGrade(score) {
+    if (isPassed(score))
+        return getGrade("PASSED");
+    return isVeryGood(score) ? getGrade("VERY_GOOD") : getGrade("EXCELLENT");
+}
+function getGrade(gradeType) {
+    return GRADE_NAMES[gradeType];
+}
+function getScoreLimit(limitType) {
+    return SCORE_LIMITS[limitType];
+}
+function isNumericValid(score) {
+    return isNumberBetween(score, getScoreLimit("MIN"), getScoreLimit("MAX"));
+}
+function isFailed(score) {
+    return isNumberLessThan(score, getScoreLimit("PASSED_MIN"));
+}
+function isPassed(score) {
+    return isNumberLessThan(score, getScoreLimit("VERY_GOOD_MIN"));
+}
+function isVeryGood(score) {
+    return isNumberLessThan(score, getScoreLimit("EXCELLENT_MIN"));
+}
+function handleInvalid(messageType) {
     throwError(MESSAGES[messageType]);
-}
-function isScoreMissing(score) {
-    return score == null || score == undefined || Number.isNaN(score);
-}
-function isScoreNumeric(score) {
-    return typeof score == "number";
-}
-function isScoreNumericValid(score) {
-    return isNumberBetween(score, SCORE_LIMITS.MIN, SCORE_LIMITS.MAX);
-}
-function isScoreFailed(score) {
-    return isNumberLessThan(score, SCORE_LIMITS.PASSED_MIN);
-}
-function isScorePassed(score) {
-    return isNumberLessThan(score, SCORE_LIMITS.VERY_GOOD_MIN);
-}
-function isScoreVeryGood(score) {
-    return isNumberLessThan(score, SCORE_LIMITS.EXCELLENT_MIN);
 }
