@@ -7,10 +7,13 @@ export const GRADE_NAMES = {
 
 export const MESSAGES = {
 	EMPTY_TEXT: "Empty text",
+	EMPTY_USER_ID: "Empty user ID",
 	INVALID_NUMBER: "Invalid number input",
 	INVALID_TEXT_LENGTH: "Invalid text length",
 	INVALID_TEXT_PATTERN: "Invalid text pattern",
+	INVALID_USER_ID: "Invalid user ID",
 	MISSING_INPUT: "Missing input",
+	MISSING_USER_ID: "Missing user ID",
 	NOT_A_NUMBER: "Input is not a number",
 }
 
