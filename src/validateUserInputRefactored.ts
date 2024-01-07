@@ -38,7 +38,8 @@ function isLengthValid(length: number): boolean {
 }
 
 function isTextPatternValid(input: string): boolean {
-	return /^[a-zA-Z0-9]+$/.test(input)
+	const patternAlphaNumeric = /^[a-zA-Z0-9]+$/
+	return patternAlphaNumeric.test(input)
 }
 
 function getInputLengthLimit(limitType: keyof typeof INPUT_LENGTH_LIMITS) {

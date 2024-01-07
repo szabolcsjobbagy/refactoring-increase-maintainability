@@ -35,7 +35,8 @@ function isLengthValid(length) {
     return isNumberBetween(length, getInputLengthLimit("MIN"), getInputLengthLimit("MAX"));
 }
 function isTextPatternValid(input) {
-    return /^[a-zA-Z0-9]+$/.test(input);
+    const patternAlphaNumeric = /^[a-zA-Z0-9]+$/;
+    return patternAlphaNumeric.test(input);
 }
 function getInputLengthLimit(limitType) {
     return INPUT_LENGTH_LIMITS[limitType];
