@@ -2,40 +2,31 @@ import { INPUT_LENGTH_LIMITS, MESSAGES } from "./constants"
 import { isEmptyText, isMissing } from "./utilities"
 
 export function validateUserInput(input: string): boolean {
-	if (!validateMissing(input)) return false
-	if (!validateEmpty(input)) return false
-	if (!validateLength(input)) return false
-	if (!validatePattern(input)) return false
+	if (!isNotMissingOrEmpty(input)) return false
+	if (!isLengthValid(input)) return false
+	if (!isTextPatternValid(input)) return false
 	return true
 }
 
-function validateMissing(input: string): boolean {
+function isNotMissingOrEmpty(input: string): boolean {
 	if (isMissing(input)) return handleInvalid("MISSING_INPUT")
-	return true
-}
-
-function validateEmpty(input: string): boolean {
 	if (isEmptyText(input)) return handleInvalid("EMPTY_TEXT")
 	return true
 }
 
-function validateLength(input: string): boolean {
-	if (!isLengthValid(input.length)) return handleInvalid("INVALID_TEXT_LENGTH")
-	return true
-}
+function isLengthValid(input: string): boolean {
+	const isLengthInValidRange =
+		INPUT_LENGTH_LIMITS["MIN"] <= input.length && input.length <= INPUT_LENGTH_LIMITS["MAX"]
 
-function validatePattern(input: string): boolean {
-	if (!isTextPatternValid(input)) return handleInvalid("INVALID_TEXT_PATTERN")
+	if (!isLengthInValidRange) return handleInvalid("INVALID_TEXT_LENGTH")
 	return true
-}
-
-function isLengthValid(length: number): boolean {
-	return INPUT_LENGTH_LIMITS["MIN"] <= length && length <= INPUT_LENGTH_LIMITS["MAX"]
 }
 
 function isTextPatternValid(input: string): boolean {
-	const patternAlphaNumeric = /^[a-zA-Z0-9]+$/
-	return patternAlphaNumeric.test(input)
+	const isPatternAlphaNumeric = /^[a-zA-Z0-9]+$/.test(input)
+
+	if (!isPatternAlphaNumeric) return handleInvalid("INVALID_TEXT_PATTERN")
+	return true
 }
 
 function handleInvalid(messageType: keyof typeof MESSAGES): boolean {

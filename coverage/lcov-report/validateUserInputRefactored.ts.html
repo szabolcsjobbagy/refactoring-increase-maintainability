@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>44/44</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>20/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>44/44</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
@@ -98,19 +98,9 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a>
-<a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
@@ -120,32 +110,24 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
@@ -155,40 +137,31 @@
 import { isEmptyText, isMissing } from "./utilities"
 &nbsp;
 export function validateUserInput(input: string): boolean {
-	if (!validateMissing(input)) return false
-	if (!validateEmpty(input)) return false
-	if (!validateLength(input)) return false
-	if (!validatePattern(input)) return false
+	if (!isNotMissingOrEmpty(input)) return false
+	if (!isLengthValid(input)) return false
+	if (!isTextPatternValid(input)) return false
 	return true
 }
 &nbsp;
-function validateMissing(input: string): boolean {
+function isNotMissingOrEmpty(input: string): boolean {
 	if (isMissing(input)) return handleInvalid("MISSING_INPUT")
-	return true
-}
-&nbsp;
-function validateEmpty(input: string): boolean {
 	if (isEmptyText(input)) return handleInvalid("EMPTY_TEXT")
 	return true
 }
 &nbsp;
-function validateLength(input: string): boolean {
-	if (!isLengthValid(input.length)) return handleInvalid("INVALID_TEXT_LENGTH")
-	return true
-}
+function isLengthValid(input: string): boolean {
+	const isLengthInValidRange =
+		INPUT_LENGTH_LIMITS["MIN"] &lt;= input.length &amp;&amp; input.length &lt;= INPUT_LENGTH_LIMITS["MAX"]
 &nbsp;
-function validatePattern(input: string): boolean {
-	if (!isTextPatternValid(input)) return handleInvalid("INVALID_TEXT_PATTERN")
+	if (!isLengthInValidRange) return handleInvalid("INVALID_TEXT_LENGTH")
 	return true
-}
-&nbsp;
-function isLengthValid(length: number): boolean {
-	return INPUT_LENGTH_LIMITS["MIN"] &lt;= length &amp;&amp; length &lt;= INPUT_LENGTH_LIMITS["MAX"]
 }
 &nbsp;
 function isTextPatternValid(input: string): boolean {
-	const patternAlphaNumeric = /^[a-zA-Z0-9]+$/
-	return patternAlphaNumeric.test(input)
+	const isPatternAlphaNumeric = /^[a-zA-Z0-9]+$/.test(input)
+&nbsp;
+	if (!isPatternAlphaNumeric) return handleInvalid("INVALID_TEXT_PATTERN")
+	return true
 }
 &nbsp;
 function handleInvalid(messageType: keyof typeof MESSAGES): boolean {
@@ -202,7 +175,7 @@ function handleInvalid(messageType: keyof typeof MESSAGES): boolean {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-12T08:09:45.224Z
+                at 2024-01-12T09:35:27.948Z
             </div>
         <script src="prettify.js"></script>
         <script>
