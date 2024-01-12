@@ -1,5 +1,5 @@
 import { GRADE_NAMES, MESSAGES, SCORE_LIMITS } from "./constants"
-import { isMissing, isNumeric, isNumberBetween, isNumberLessThan, throwError } from "./utilities"
+import { isMissing, isNumeric, throwError } from "./utilities"
 
 export function calculateGrade(score: number): string {
 	validateInput(score)
@@ -21,36 +21,25 @@ function validateExisting(score: number): void {
 }
 
 function assignGrade(score: number): string {
-	return isFailed(score) ? getGrade("FAILED") : assignNotFailedGrade(score)
-}
-
-function assignNotFailedGrade(score: number) {
-	if (isPassed(score)) return getGrade("PASSED")
-	return isVeryGood(score) ? getGrade("VERY_GOOD") : getGrade("EXCELLENT")
-}
-
-function getGrade(gradeType: keyof typeof GRADE_NAMES) {
-	return GRADE_NAMES[gradeType]
-}
-
-function getScoreLimit(limitType: keyof typeof SCORE_LIMITS) {
-	return SCORE_LIMITS[limitType]
+	if (isFailed(score)) return GRADE_NAMES["FAILED"]
+	if (isPassed(score)) return GRADE_NAMES["PASSED"]
+	return isVeryGood(score) ? GRADE_NAMES["VERY_GOOD"] : GRADE_NAMES["EXCELLENT"]
 }
 
 function isNumericValid(score: number): boolean {
-	return isNumberBetween(score, getScoreLimit("MIN"), getScoreLimit("MAX"))
+	return SCORE_LIMITS["MIN"] <= score && score <= SCORE_LIMITS["MAX"]
 }
 
 function isFailed(score: number): boolean {
-	return isNumberLessThan(score, getScoreLimit("PASSED_MIN"))
+	return score < SCORE_LIMITS["PASSED_MIN"]
 }
 
 function isPassed(score: number): boolean {
-	return isNumberLessThan(score, getScoreLimit("VERY_GOOD_MIN"))
+	return SCORE_LIMITS["PASSED_MIN"] <= score && score < SCORE_LIMITS["VERY_GOOD_MIN"]
 }
 
 function isVeryGood(score: number): boolean {
-	return isNumberLessThan(score, getScoreLimit("EXCELLENT_MIN"))
+	return SCORE_LIMITS["VERY_GOOD_MIN"] <= score && score < SCORE_LIMITS["EXCELLENT_MIN"]
 }
 
 function handleInvalid(messageType: keyof typeof MESSAGES) {

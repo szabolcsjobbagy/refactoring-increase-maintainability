@@ -1,40 +1,36 @@
 import { INPUT_LENGTH_LIMITS, MESSAGES } from "./constants"
-import { isEmptyText, isMissing, isNumberBetween, throwError } from "./utilities"
+import { isEmptyText, isMissing } from "./utilities"
 
 export function validateUserInput(input: string): boolean {
-	try {
-		validateMissing(input)
-		validateEmpty(input)
-		validateExisting(input)
-		return true
-	} catch (error) {
-		return false
-	}
+	if (!validateMissing(input)) return false
+	if (!validateEmpty(input)) return false
+	if (!validateLength(input)) return false
+	if (!validatePattern(input)) return false
+	return true
 }
 
-function validateMissing(input: string): void {
-	if (isMissing(input)) handleInvalid("MISSING_INPUT")
+function validateMissing(input: string): boolean {
+	if (isMissing(input)) return handleInvalid("MISSING_INPUT")
+	return true
 }
 
-function validateEmpty(input: string): void {
-	if (isEmptyText(input)) handleInvalid("EMPTY_TEXT")
+function validateEmpty(input: string): boolean {
+	if (isEmptyText(input)) return handleInvalid("EMPTY_TEXT")
+	return true
 }
 
-function validateExisting(input: string): void {
-	validateLength(input)
-	validatePattern(input)
+function validateLength(input: string): boolean {
+	if (!isLengthValid(input.length)) return handleInvalid("INVALID_TEXT_LENGTH")
+	return true
 }
 
-function validateLength(input: string): void {
-	if (!isLengthValid(input.length)) handleInvalid("INVALID_TEXT_LENGTH")
-}
-
-function validatePattern(input: string): void {
-	if (!isTextPatternValid(input)) handleInvalid("INVALID_TEXT_PATTERN")
+function validatePattern(input: string): boolean {
+	if (!isTextPatternValid(input)) return handleInvalid("INVALID_TEXT_PATTERN")
+	return true
 }
 
 function isLengthValid(length: number): boolean {
-	return isNumberBetween(length, getInputLengthLimit("MIN"), getInputLengthLimit("MAX"))
+	return INPUT_LENGTH_LIMITS["MIN"] <= length && length <= INPUT_LENGTH_LIMITS["MAX"]
 }
 
 function isTextPatternValid(input: string): boolean {
@@ -42,10 +38,7 @@ function isTextPatternValid(input: string): boolean {
 	return patternAlphaNumeric.test(input)
 }
 
-function getInputLengthLimit(limitType: keyof typeof INPUT_LENGTH_LIMITS) {
-	return INPUT_LENGTH_LIMITS[limitType]
-}
-
-function handleInvalid(messageType: keyof typeof MESSAGES) {
-	throwError(MESSAGES[messageType])
+function handleInvalid(messageType: keyof typeof MESSAGES): boolean {
+	console.log(MESSAGES[messageType])
+	return false
 }

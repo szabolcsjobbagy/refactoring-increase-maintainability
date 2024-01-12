@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>51/51</span>
+                <span class='fraction'>44/44</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>15/15</span>
+                <span class='fraction'>25/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>51/51</span>
+                <span class='fraction'>44/44</span>
             </div>
         
             
@@ -107,14 +107,7 @@
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">26x</span>
@@ -122,24 +115,28 @@
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">26x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
@@ -148,60 +145,45 @@
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-yes">18x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { INPUT_LENGTH_LIMITS, MESSAGES } from "./constants"
-import { isEmptyText, isMissing, isNumberBetween, throwError } from "./utilities"
+import { isEmptyText, isMissing } from "./utilities"
 &nbsp;
 export function validateUserInput(input: string): boolean {
-	try {
-		validateMissing(input)
-		validateEmpty(input)
-		validateExisting(input)
-		return true
-	} catch (error) {
-		return false
-	}
+	if (!validateMissing(input)) return false
+	if (!validateEmpty(input)) return false
+	if (!validateLength(input)) return false
+	if (!validatePattern(input)) return false
+	return true
 }
 &nbsp;
-function validateMissing(input: string): void {
-	if (isMissing(input)) handleInvalid("MISSING_INPUT")
+function validateMissing(input: string): boolean {
+	if (isMissing(input)) return handleInvalid("MISSING_INPUT")
+	return true
 }
 &nbsp;
-function validateEmpty(input: string): void {
-	if (isEmptyText(input)) handleInvalid("EMPTY_TEXT")
+function validateEmpty(input: string): boolean {
+	if (isEmptyText(input)) return handleInvalid("EMPTY_TEXT")
+	return true
 }
 &nbsp;
-function validateExisting(input: string): void {
-	validateLength(input)
-	validatePattern(input)
+function validateLength(input: string): boolean {
+	if (!isLengthValid(input.length)) return handleInvalid("INVALID_TEXT_LENGTH")
+	return true
 }
 &nbsp;
-function validateLength(input: string): void {
-	if (!isLengthValid(input.length)) handleInvalid("INVALID_TEXT_LENGTH")
-}
-&nbsp;
-function validatePattern(input: string): void {
-	if (!isTextPatternValid(input)) handleInvalid("INVALID_TEXT_PATTERN")
+function validatePattern(input: string): boolean {
+	if (!isTextPatternValid(input)) return handleInvalid("INVALID_TEXT_PATTERN")
+	return true
 }
 &nbsp;
 function isLengthValid(length: number): boolean {
-	return isNumberBetween(length, getInputLengthLimit("MIN"), getInputLengthLimit("MAX"))
+	return INPUT_LENGTH_LIMITS["MIN"] &lt;= length &amp;&amp; length &lt;= INPUT_LENGTH_LIMITS["MAX"]
 }
 &nbsp;
 function isTextPatternValid(input: string): boolean {
@@ -209,12 +191,9 @@ function isTextPatternValid(input: string): boolean {
 	return patternAlphaNumeric.test(input)
 }
 &nbsp;
-function getInputLengthLimit(limitType: keyof typeof INPUT_LENGTH_LIMITS) {
-	return INPUT_LENGTH_LIMITS[limitType]
-}
-&nbsp;
-function handleInvalid(messageType: keyof typeof MESSAGES) {
-	throwError(MESSAGES[messageType])
+function handleInvalid(messageType: keyof typeof MESSAGES): boolean {
+	console.log(MESSAGES[messageType])
+	return false
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -223,7 +202,7 @@ function handleInvalid(messageType: keyof typeof MESSAGES) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-01-07T08:16:41.857Z
+                at 2024-01-12T08:09:45.224Z
             </div>
         <script src="prettify.js"></script>
         <script>

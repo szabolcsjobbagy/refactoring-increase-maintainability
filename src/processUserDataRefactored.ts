@@ -1,17 +1,15 @@
 import { MESSAGES } from "./constants"
 import { isEmptyText, isMissing, throwError } from "./utilities"
 
-export function processUserData(
-	userIds: string[],
-	userId: string,
-	isActive: boolean,
-	isLoggedIn: boolean,
-	waitLength: number
-): string {
-	const userIndex = validateUser(userId, userIds)
-	return isLoggedIn && isActive
-		? getSuccessResponse(userId, userIndex)
-		: getElseResponse(isLoggedIn, isActive, waitLength)
+export class User {
+	constructor(public userId: string, public isActive: boolean, public isLoggedIn: boolean) {}
+}
+
+export function processUserData(userIds: string[], user: User, waitLength: number): string {
+	const userIndex = validateUser(user.userId, userIds)
+	return user.isLoggedIn && user.isActive
+		? getSuccessResponse(user.userId, userIndex)
+		: getElseResponse(user.isLoggedIn, user.isActive, waitLength)
 }
 
 function validateUser(userId: string, userIds: string[]): number {
@@ -29,16 +27,13 @@ function validateEmpty(userId: string): void {
 }
 
 function getUserIndex(userId: string, userIds: string[]): number {
-	if (userIndexInUsers(userId, userIds) < 0) handleInvalid("INVALID_USER_ID")
-	return userIndexInUsers(userId, userIds)
+	const isUserIndexLessThanZero = userIds.indexOf(userId) < 0
+	if (isUserIndexLessThanZero) handleInvalid("INVALID_USER_ID")
+	return userIds.indexOf(userId)
 }
 
 function handleInvalid(messageType: keyof typeof MESSAGES) {
 	throwError(MESSAGES[messageType])
-}
-
-function userIndexInUsers(userId: string, userIds: string[]): number {
-	return userIds.indexOf(userId)
 }
 
 function getSuccessResponse(userId: string, userIndex: number): string {
